@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  </head>
+
+  <body>
+    <div id="clock"></div>
+
+    <script>
+      $(document).ready(function() { //lets the page load up completely before performing any functions.
+        function startTime() {
+          var today = new Date(); //allows to check the current date and time 
+          var h = today.getHours(); //getting the time in hours
+          var m = today.getMinutes(); // getting the time in minutes
+          var s = today.getSeconds(); // getting the time in seconds
+
+          m = checkTime(m); //allows to check for minutes in the clock
+          s = checkTime(s); //allwos to check for the seconds in the clock
+
+          $("#clock").text(h + ":" + m + ":" + s); //displaying the format of the time. (ex: 01:10:34)
+
+          setTimeout(startTime, 1000); //allows the clock to change and check every second.
+        }
+
+        function checkTime(i) { //checking time of the minutes and seconds.
+          if (i < 10) { //if minutes and seconds are below 10, adding a 0 in front of the number. ex. 01,02,03,etc.
+            i = "0" + i;
+          }
+
+          return i; //returns the i into the function checktime
+        }
+
+        function changeFontSize() {
+          var currentFontSize = $("body").css("fontSize"); //declaring variable currentFontSize
+
+          if (currentFontSize === "12px") { //if current font is size is 12px, change it so 20px.
+            $("body").css("fontSize", "20px");
+          } else {
+            $("body").css("fontSize", "12px");//if is 20px, change it to 12px.
+          }
+          
+          setTimeout(changeFontSize, 3000); // allows the changing of font size every 3 seconds alternating between 12px and 20px
+        }
+
+        function changeFontColor() {
+          var currentFontColor = $("body").css("color"); //declaring variable to change font color
+
+          if (currentFontColor === "rgb(0, 0, 0)") {
+            $("body").css("color", "red"); //changing whatever is in the body to the color of red, if it is black.
+          } else {
+            $("body").css("color", "black"); //changing the color to black, if is it not black already.
+          }
+
+          setTimeout(changeFontColor, 10000); // changing font color 10 seconds
+        }
+
+        startTime(); // manages the clock
+        changeFontSize(); // changes the font size
+        changeFontColor(); // changes the font color
+      });
+    </script>
+  </body>
+</html>
